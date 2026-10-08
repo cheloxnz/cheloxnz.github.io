@@ -18,12 +18,17 @@ import Icon from './Icon.vue'
       </div>
 
       <div class="grid">
-        <a v-for="(p, i) in projects" :key="p.id" :href="p.repo" target="_blank" rel="noopener"
-           class="card" :style="{ '--h': p.hue }" v-reveal="(i % 3) * 90">
+        <article v-for="(p, i) in projects" :key="p.id" class="card" :class="{ featured: p.image }"
+                 :style="{ '--h': p.hue }" v-reveal="(i % 3) * 90">
           <div class="cover" aria-hidden="true">
-            <div class="orb" />
-            <div class="lines" />
-            <span class="cover-title serif">{{ t.projectsSec.items[p.id].title }}</span>
+            <template v-if="p.image">
+              <img :src="p.image" :alt="''" loading="lazy" width="1200" height="900" />
+            </template>
+            <template v-else>
+              <div class="orb" />
+              <div class="lines" />
+              <span class="cover-title serif">{{ t.projectsSec.items[p.id].title }}</span>
+            </template>
             <span class="no">0{{ i + 1 }}</span>
           </div>
           <div class="body">
@@ -31,10 +36,17 @@ import Icon from './Icon.vue'
               <span class="type">{{ t.projectsSec.items[p.id].type }}</span>
               <span class="go"><Icon name="arrow" /></span>
             </div>
+            <h3 v-if="p.image" class="f-title">{{ t.projectsSec.items[p.id].title }}</h3>
             <p>{{ t.projectsSec.items[p.id].desc }}</p>
             <div class="tags"><span v-for="tech in p.tech" :key="tech" class="chip">{{ tech }}</span></div>
+            <div class="links">
+              <a :href="p.demo || p.repo" target="_blank" rel="noopener" class="main-link">
+                {{ p.demo ? t.projectsSec.viewDemo : t.projectsSec.viewRepo }}<Icon name="arrow" />
+              </a>
+              <a v-if="p.demo" :href="p.repo" target="_blank" rel="noopener" class="sub-link"><Icon name="github" />{{ t.projectsSec.viewRepo }}</a>
+            </div>
           </div>
-        </a>
+        </article>
       </div>
     </div>
   </section>
@@ -91,6 +103,28 @@ import Icon from './Icon.vue'
 h3 { margin: 0.2rem 0 0; font-size: 1.35rem; font-weight: 500; letter-spacing: -0.03em; }
 p { margin: 0; color: var(--muted); font-size: 0.95rem; flex: 1; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.8rem; }
+
+.card { position: relative; }
+.links { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; font-size: 0.9rem; }
+.main-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text); font-weight: 500; }
+.main-link svg, .sub-link svg { width: 16px; height: 16px; }
+/* stretched link: toda la tarjeta clickeable */
+.main-link::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.sub-link { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); transition: color .3s; }
+.sub-link:hover, .main-link:hover { color: var(--accent); }
+
+.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.5fr 1fr; }
+.featured .cover { position: relative; aspect-ratio: auto; min-height: 380px; border-bottom: 0; border-right: 1px solid var(--line); background: #0b0c0f; }
+.featured .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform 1s var(--ease); }
+.featured:hover .cover img { transform: scale(1.03); }
+.featured .no { display: none; }
+.featured .body { padding: clamp(1.5rem, 3vw, 2.75rem); justify-content: center; }
+.f-title { margin: 0.4rem 0 0.2rem; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1.05; }
+.featured p { flex: none; font-size: 1rem; }
+@media (max-width: 900px) {
+  .featured { grid-template-columns: 1fr; }
+  .featured .cover { min-height: 0; aspect-ratio: 16 / 10; border-right: 0; border-bottom: 1px solid var(--line); }
+}
 
 @media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
