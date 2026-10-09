@@ -18,11 +18,11 @@ import Icon from './Icon.vue'
       </div>
 
       <div class="grid">
-        <article v-for="(p, i) in projects" :key="p.id" class="card" :class="{ featured: p.image }"
+        <article v-for="(p, i) in projects" :key="p.id" class="card" :class="{ featured: p.image, alt: p.image && i % 2 === 1 }"
                  :style="{ '--h': p.hue }" v-reveal="(i % 3) * 90">
           <div class="cover" aria-hidden="true">
             <template v-if="p.image">
-              <img :src="p.image" :alt="''" loading="lazy" width="1200" height="900" />
+              <img :style="{ objectPosition: p.imagePos || 'top' }" :src="p.image" :alt="''" loading="lazy" width="1200" height="900" />
             </template>
             <template v-else>
               <div class="orb" />
@@ -55,7 +55,7 @@ import Icon from './Icon.vue'
 <style scoped>
 .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; margin-bottom: clamp(3rem, 6vw, 5rem); }
 .head .btn svg { width: 18px; height: 18px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 
 .card {
   display: flex; flex-direction: column;
@@ -114,18 +114,21 @@ p { margin: 0; color: var(--muted); font-size: 0.95rem; flex: 1; }
 .sub-link:hover, .main-link:hover { color: var(--accent); }
 
 .featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.5fr 1fr; }
+.featured.alt { grid-template-columns: 1fr 1.5fr; }
+.featured.alt .cover { order: 2; border-right: 0; border-left: 1px solid var(--line); }
 .featured .cover { position: relative; aspect-ratio: auto; min-height: 380px; border-bottom: 0; border-right: 1px solid var(--line); background: #0b0c0f; }
-.featured .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; transition: transform 1s var(--ease); }
+.featured .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 1s var(--ease); }
 .featured:hover .cover img { transform: scale(1.03); }
 .featured .no { display: none; }
 .featured .body { padding: clamp(1.5rem, 3vw, 2.75rem); justify-content: center; }
 .f-title { margin: 0.4rem 0 0.2rem; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1.05; }
 .featured p { flex: none; font-size: 1rem; }
 @media (max-width: 900px) {
-  .featured { grid-template-columns: 1fr; }
+  .featured, .featured.alt { grid-template-columns: 1fr; }
+  .featured.alt .cover { order: 0; border-left: 0; }
   .featured .cover { min-height: 0; aspect-ratio: 16 / 10; border-right: 0; border-bottom: 1px solid var(--line); }
 }
 
-@media (max-width: 1080px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1280px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
 </style>

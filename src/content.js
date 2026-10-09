@@ -21,8 +21,7 @@ export const stack = {
 
 const projectsBase = [
   { id: 'novamarket', repo: 'https://github.com/cheloxnz/nova-market', demo: 'https://cheloxnz.github.io/nova-market/', image: '/projects/nova-market.jpg', tech: ['Vue 3', 'Vue Router', 'Pinia', 'Vite'], hue: 228 },
-  { id: 'ecommerce', repo: 'https://github.com/cheloxnz/Ecommerce-Tienda', tech: ['React', 'Redux', 'Node', 'Express', 'Passport', 'PostgreSQL'], hue: 72 },
-  { id: 'wallet', repo: 'https://github.com/cheloxnz/Proyecto-Billetera-HB', tech: ['React Native', 'Redux', 'Node', 'Express', 'PostgreSQL'], hue: 190 },
+  { id: 'novabank', repo: 'https://github.com/cheloxnz/nova-bank', demo: 'https://cheloxnz.github.io/nova-bank/', image: '/projects/nova-bank.jpg', imagePos: 'center', tech: ['Vue 3', 'Pinia', 'PWA', 'Vite'], hue: 250 },
   { id: 'medical', repo: 'https://github.com/cheloxnz/app-medical', tech: ['Vue', 'Vuetify'], hue: 150 },
   { id: 'tsfull', repo: 'https://github.com/cheloxnz/typescript-node-react', tech: ['TypeScript', 'Node', 'Express', 'MongoDB', 'React'], hue: 260 },
   { id: 'restapi', repo: 'https://github.com/cheloxnz/node-js-mysql-rest-api', tech: ['Node', 'Express', 'MySQL'], hue: 20 },
@@ -106,9 +105,8 @@ const es = {
     viewDemo: 'Ver demo',
     more: 'Más proyectos en GitHub',
     items: {
+      novabank: { title: 'Nova Bank', type: 'Fintech · Mobile · PWA', desc: 'App fintech mobile instalable: saldo y movimientos, transferencias en 3 pasos, tarjeta virtual con congelamiento y límites, y estadísticas de gastos.' },
       novamarket: { title: 'Nova Market', type: 'E-commerce · Template', desc: 'Template de marketplace con búsqueda con autocompletado, filtros, ficha de producto, carrito, favoritos y checkout en 3 pasos.' },
-      ecommerce: { title: 'Back to the 90\'s', type: 'E-commerce', desc: 'Tienda online de merchandising noventoso con carrito, autenticación OAuth y panel de administración.' },
-      wallet: { title: 'Henry Bank', type: 'Fintech · Mobile', desc: 'Billetera virtual mobile: cuentas, transferencias y movimientos, con backend propio y autenticación.' },
       medical: { title: 'App Medical', type: 'Health · SPA', desc: 'Aplicación de gestión médica construida con Vue y Vuetify, con foco en una UI clara y usable.' },
       tsfull: { title: 'TS Full Stack', type: 'Full Stack', desc: 'Aplicación full stack tipada de punta a punta: Node, Express, Passport y MongoDB Atlas con frontend en React.' },
       restapi: { title: 'Node MySQL API', type: 'Backend', desc: 'API REST con Node, Express y MySQL: rutas CRUD, manejo de errores y estructura modular.' },
@@ -196,9 +194,8 @@ const en = {
     viewDemo: 'Live demo',
     more: 'More projects on GitHub',
     items: {
+      novabank: { title: 'Nova Bank', type: 'Fintech · Mobile · PWA', desc: 'Installable mobile fintech app: balance and activity, 3-step transfers, virtual card with freeze and limits, and spending insights.' },
       novamarket: { title: 'Nova Market', type: 'E-commerce · Template', desc: 'Marketplace template with autocomplete search, filters, product page, cart, favorites and a 3-step checkout.' },
-      ecommerce: { title: 'Back to the 90\'s', type: 'E-commerce', desc: '90s-themed merch store with cart, OAuth authentication and an admin panel.' },
-      wallet: { title: 'Henry Bank', type: 'Fintech · Mobile', desc: 'Mobile virtual wallet: accounts, transfers and transaction history, with its own backend and auth.' },
       medical: { title: 'App Medical', type: 'Health · SPA', desc: 'Medical management app built with Vue and Vuetify, focused on a clear, usable UI.' },
       tsfull: { title: 'TS Full Stack', type: 'Full Stack', desc: 'End-to-end typed full stack app: Node, Express, Passport and MongoDB Atlas with a React frontend.' },
       restapi: { title: 'Node MySQL API', type: 'Backend', desc: 'REST API with Node, Express and MySQL: CRUD routes, error handling and modular structure.' },
